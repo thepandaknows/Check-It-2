@@ -82,7 +82,25 @@ namespace ToDoListApp
         private void doneButton_Click(object sender, EventArgs e)
         {
             // when user selects a task and clicks the Check it! button, the task text will be struck out
+            // check if a task is selected
+            if (toDoListView.SelectedRows.Count > 0)
+            {
+                // get the selected row
+                DataGridViewRow selectedRow = toDoListView.SelectedRows[0];
 
+                // strike out the task title and description
+                selectedRow.Cells["Title"].Style.Font = new Font(toDoListView.Font, FontStyle.Strikeout);
+                selectedRow.Cells["Description"].Style.Font = new Font(toDoListView.Font, FontStyle.Strikeout);
+            } else
+            {
+                MessageBox.Show("Please slect a task to mark as done.");
+            }
+
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            // when user picks a date and clicks the save button, due date column will be added to the table
         }
     }
 }
