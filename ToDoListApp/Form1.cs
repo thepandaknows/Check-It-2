@@ -24,6 +24,7 @@ namespace ToDoListApp
             // Create columns
             todoList.Columns.Add("Title");
             todoList.Columns.Add("Description");
+            todoList.Columns.Add("Due Date", typeof(DateTime));
 
             // Point datagridview to the datasource
             toDoListView.DataSource = todoList;
@@ -71,11 +72,16 @@ namespace ToDoListApp
             else
             {
                 // if brand new note, add text from title & description boxes as a new row (task item)
-                todoList.Rows.Add(titleTextbox.Text, descriptionTextbox.Text);
+                DataRow newRow = todoList.Rows.Add(titleTextbox.Text, descriptionTextbox.Text);
+
+                // set the due date for the new row
+                newRow["Due Date"] = dateTimePicker1.Value;
             }
-            // clear out all fields have clicking Save
+            // clear out all fields when clicking Save
             titleTextbox.Text = "";
             descriptionTextbox.Text = "";
+            // dateTimePicker will default to today's date
+            dateTimePicker1.Value = DateTime.Today;
             isEditing = false;
         }
 
