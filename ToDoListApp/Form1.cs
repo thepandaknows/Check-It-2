@@ -51,8 +51,21 @@ namespace ToDoListApp
         {
             try
             {
-                // access the table, delete the selected row (task item)
-                todoList.Rows[toDoListView.CurrentCell.RowIndex].Delete();
+                if (toDoListView.SelectedRows.Count > 0)
+                {
+                    // ask for confirmation before deleting
+                    DialogResult result = MessageBox.Show("Are you sure you want to delete?", "Confirm Deletion", MessageBoxButtons.YesNo);
+                    if (result == DialogResult.Yes)
+                    {
+                        // access the table, delete the selected row (task item)
+                        todoList.Rows[toDoListView.CurrentCell.RowIndex].Delete();
+                    }
+                } 
+                else
+                {
+                    // error checking: make sure the user has selected a task for deletion
+                    MessageBox.Show("Please select a task to delete.");
+                }
             }
             catch (Exception ex)
             { 
@@ -99,7 +112,7 @@ namespace ToDoListApp
                 selectedRow.Cells["Description"].Style.Font = new Font(toDoListView.Font, FontStyle.Strikeout);
             } else
             {
-                MessageBox.Show("Please slect a task to mark as done.");
+                MessageBox.Show("Please select a task to mark as done.");
             }
 
         }

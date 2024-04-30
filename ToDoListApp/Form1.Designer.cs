@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ToDoList));
             this.title = new System.Windows.Forms.Label();
             this.titleTextbox = new System.Windows.Forms.TextBox();
             this.descriptionTextbox = new System.Windows.Forms.TextBox();
@@ -190,8 +191,9 @@
             this.Controls.Add(this.descriptionTextbox);
             this.Controls.Add(this.titleTextbox);
             this.Controls.Add(this.title);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ToDoList";
-            this.Text = "Check It";
+            this.Text = "Check It! A To-Do List App";
             this.Load += new System.EventHandler(this.ToDoList_Load);
             ((System.ComponentModel.ISupportInitialize)(this.toDoListView)).EndInit();
             this.ResumeLayout(false);
