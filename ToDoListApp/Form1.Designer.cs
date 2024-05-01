@@ -61,7 +61,7 @@
             // titleTextbox
             // 
             this.titleTextbox.Location = new System.Drawing.Point(24, 173);
-            this.titleTextbox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.titleTextbox.Margin = new System.Windows.Forms.Padding(6);
             this.titleTextbox.Name = "titleTextbox";
             this.titleTextbox.Size = new System.Drawing.Size(1495, 31);
             this.titleTextbox.TabIndex = 1;
@@ -69,7 +69,7 @@
             // descriptionTextbox
             // 
             this.descriptionTextbox.Location = new System.Drawing.Point(24, 267);
-            this.descriptionTextbox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.descriptionTextbox.Margin = new System.Windows.Forms.Padding(6);
             this.descriptionTextbox.Name = "descriptionTextbox";
             this.descriptionTextbox.Size = new System.Drawing.Size(1748, 31);
             this.descriptionTextbox.TabIndex = 2;
@@ -100,7 +100,7 @@
             // 
             this.newButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.newButton.Location = new System.Drawing.Point(24, 421);
-            this.newButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.newButton.Margin = new System.Windows.Forms.Padding(6);
             this.newButton.Name = "newButton";
             this.newButton.Size = new System.Drawing.Size(320, 79);
             this.newButton.TabIndex = 5;
@@ -112,7 +112,7 @@
             // 
             this.editButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.editButton.Location = new System.Drawing.Point(352, 421);
-            this.editButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.editButton.Margin = new System.Windows.Forms.Padding(6);
             this.editButton.Name = "editButton";
             this.editButton.Size = new System.Drawing.Size(320, 79);
             this.editButton.TabIndex = 6;
@@ -124,7 +124,7 @@
             // 
             this.deleteButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.deleteButton.Location = new System.Drawing.Point(680, 421);
-            this.deleteButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.deleteButton.Margin = new System.Windows.Forms.Padding(6);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(320, 79);
             this.deleteButton.TabIndex = 7;
@@ -136,7 +136,7 @@
             // 
             this.saveButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.saveButton.Location = new System.Drawing.Point(1008, 421);
-            this.saveButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.saveButton.Margin = new System.Windows.Forms.Padding(6);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(320, 79);
             this.saveButton.TabIndex = 8;
@@ -150,11 +150,11 @@
             this.toDoListView.BackgroundColor = System.Drawing.SystemColors.Window;
             this.toDoListView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.toDoListView.Location = new System.Drawing.Point(24, 535);
-            this.toDoListView.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.toDoListView.Margin = new System.Windows.Forms.Padding(6);
             this.toDoListView.Name = "toDoListView";
             this.toDoListView.RowHeadersWidth = 82;
             this.toDoListView.Size = new System.Drawing.Size(1752, 652);
-            this.toDoListView.TabIndex = 9;
+            this.toDoListView.TabIndex = 10;
             // 
             // dueLabel
             // 
@@ -171,10 +171,10 @@
             // 
             this.doneButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.doneButton.Location = new System.Drawing.Point(1336, 421);
-            this.doneButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.doneButton.Margin = new System.Windows.Forms.Padding(6);
             this.doneButton.Name = "doneButton";
             this.doneButton.Size = new System.Drawing.Size(444, 79);
-            this.doneButton.TabIndex = 12;
+            this.doneButton.TabIndex = 9;
             this.doneButton.Text = "Check it!";
             this.doneButton.UseVisualStyleBackColor = true;
             this.doneButton.Click += new System.EventHandler(this.doneButton_Click);
@@ -182,10 +182,10 @@
             // dateTimePicker1
             // 
             this.dateTimePicker1.Location = new System.Drawing.Point(24, 358);
-            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(6);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(1746, 31);
-            this.dateTimePicker1.TabIndex = 13;
+            this.dateTimePicker1.TabIndex = 4;
             this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // priorityTextbox
@@ -229,7 +229,7 @@
             this.Controls.Add(this.titleTextbox);
             this.Controls.Add(this.title);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "ToDoList";
             this.Text = "Check It! A To-Do List App";
             this.Load += new System.EventHandler(this.ToDoList_Load);
