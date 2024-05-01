@@ -42,39 +42,45 @@
             this.dueLabel = new System.Windows.Forms.Label();
             this.doneButton = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.priorityTextbox = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.toDoListView)).BeginInit();
             this.SuspendLayout();
             // 
             // title
             // 
             this.title.Font = new System.Drawing.Font("Microsoft Sans Serif", 36.25F);
-            this.title.Location = new System.Drawing.Point(12, 9);
+            this.title.Location = new System.Drawing.Point(24, 17);
+            this.title.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.title.Name = "title";
-            this.title.Size = new System.Drawing.Size(876, 84);
+            this.title.Size = new System.Drawing.Size(1752, 162);
             this.title.TabIndex = 0;
             this.title.Text = "Check It";
             this.title.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // titleTextbox
             // 
-            this.titleTextbox.Location = new System.Drawing.Point(12, 90);
+            this.titleTextbox.Location = new System.Drawing.Point(24, 173);
+            this.titleTextbox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.titleTextbox.Name = "titleTextbox";
-            this.titleTextbox.Size = new System.Drawing.Size(876, 20);
+            this.titleTextbox.Size = new System.Drawing.Size(1495, 31);
             this.titleTextbox.TabIndex = 1;
             // 
             // descriptionTextbox
             // 
-            this.descriptionTextbox.Location = new System.Drawing.Point(12, 139);
+            this.descriptionTextbox.Location = new System.Drawing.Point(24, 267);
+            this.descriptionTextbox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.descriptionTextbox.Name = "descriptionTextbox";
-            this.descriptionTextbox.Size = new System.Drawing.Size(876, 20);
+            this.descriptionTextbox.Size = new System.Drawing.Size(1748, 31);
             this.descriptionTextbox.TabIndex = 2;
             // 
             // descriptionLabel
             // 
             this.descriptionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.descriptionLabel.Location = new System.Drawing.Point(12, 113);
+            this.descriptionLabel.Location = new System.Drawing.Point(24, 217);
+            this.descriptionLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.descriptionLabel.Name = "descriptionLabel";
-            this.descriptionLabel.Size = new System.Drawing.Size(876, 23);
+            this.descriptionLabel.Size = new System.Drawing.Size(1752, 44);
             this.descriptionLabel.TabIndex = 3;
             this.descriptionLabel.Text = "Description:";
             this.descriptionLabel.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -82,9 +88,10 @@
             // titleLabel
             // 
             this.titleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.titleLabel.Location = new System.Drawing.Point(12, 64);
+            this.titleLabel.Location = new System.Drawing.Point(24, 123);
+            this.titleLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(876, 23);
+            this.titleLabel.Size = new System.Drawing.Size(1495, 44);
             this.titleLabel.TabIndex = 4;
             this.titleLabel.Text = "Title:";
             this.titleLabel.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -92,9 +99,10 @@
             // newButton
             // 
             this.newButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.newButton.Location = new System.Drawing.Point(12, 219);
+            this.newButton.Location = new System.Drawing.Point(24, 421);
+            this.newButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.newButton.Name = "newButton";
-            this.newButton.Size = new System.Drawing.Size(160, 41);
+            this.newButton.Size = new System.Drawing.Size(320, 79);
             this.newButton.TabIndex = 5;
             this.newButton.Text = "New";
             this.newButton.UseVisualStyleBackColor = true;
@@ -103,9 +111,10 @@
             // editButton
             // 
             this.editButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.editButton.Location = new System.Drawing.Point(176, 219);
+            this.editButton.Location = new System.Drawing.Point(352, 421);
+            this.editButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.editButton.Name = "editButton";
-            this.editButton.Size = new System.Drawing.Size(160, 41);
+            this.editButton.Size = new System.Drawing.Size(320, 79);
             this.editButton.TabIndex = 6;
             this.editButton.Text = "Edit";
             this.editButton.UseVisualStyleBackColor = true;
@@ -114,9 +123,10 @@
             // deleteButton
             // 
             this.deleteButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.deleteButton.Location = new System.Drawing.Point(340, 219);
+            this.deleteButton.Location = new System.Drawing.Point(680, 421);
+            this.deleteButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(160, 41);
+            this.deleteButton.Size = new System.Drawing.Size(320, 79);
             this.deleteButton.TabIndex = 7;
             this.deleteButton.Text = "Delete";
             this.deleteButton.UseVisualStyleBackColor = true;
@@ -125,9 +135,10 @@
             // saveButton
             // 
             this.saveButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.saveButton.Location = new System.Drawing.Point(504, 219);
+            this.saveButton.Location = new System.Drawing.Point(1008, 421);
+            this.saveButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(160, 41);
+            this.saveButton.Size = new System.Drawing.Size(320, 79);
             this.saveButton.TabIndex = 8;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = true;
@@ -138,17 +149,20 @@
             this.toDoListView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.toDoListView.BackgroundColor = System.Drawing.SystemColors.Window;
             this.toDoListView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.toDoListView.Location = new System.Drawing.Point(12, 278);
+            this.toDoListView.Location = new System.Drawing.Point(24, 535);
+            this.toDoListView.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.toDoListView.Name = "toDoListView";
-            this.toDoListView.Size = new System.Drawing.Size(876, 339);
+            this.toDoListView.RowHeadersWidth = 82;
+            this.toDoListView.Size = new System.Drawing.Size(1752, 652);
             this.toDoListView.TabIndex = 9;
             // 
             // dueLabel
             // 
             this.dueLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.dueLabel.Location = new System.Drawing.Point(12, 160);
+            this.dueLabel.Location = new System.Drawing.Point(24, 308);
+            this.dueLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.dueLabel.Name = "dueLabel";
-            this.dueLabel.Size = new System.Drawing.Size(876, 23);
+            this.dueLabel.Size = new System.Drawing.Size(1752, 44);
             this.dueLabel.TabIndex = 11;
             this.dueLabel.Text = "Due Date:";
             this.dueLabel.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -156,9 +170,10 @@
             // doneButton
             // 
             this.doneButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.doneButton.Location = new System.Drawing.Point(668, 219);
+            this.doneButton.Location = new System.Drawing.Point(1336, 421);
+            this.doneButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.doneButton.Name = "doneButton";
-            this.doneButton.Size = new System.Drawing.Size(222, 41);
+            this.doneButton.Size = new System.Drawing.Size(444, 79);
             this.doneButton.TabIndex = 12;
             this.doneButton.Text = "Check it!";
             this.doneButton.UseVisualStyleBackColor = true;
@@ -166,18 +181,40 @@
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(12, 186);
+            this.dateTimePicker1.Location = new System.Drawing.Point(24, 358);
+            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(875, 20);
+            this.dateTimePicker1.Size = new System.Drawing.Size(1746, 31);
             this.dateTimePicker1.TabIndex = 13;
             this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
+            // priorityTextbox
+            // 
+            this.priorityTextbox.Location = new System.Drawing.Point(1534, 173);
+            this.priorityTextbox.Margin = new System.Windows.Forms.Padding(6);
+            this.priorityTextbox.Name = "priorityTextbox";
+            this.priorityTextbox.Size = new System.Drawing.Size(251, 31);
+            this.priorityTextbox.TabIndex = 2;
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.label1.Location = new System.Drawing.Point(1531, 123);
+            this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(143, 44);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Priority:";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            // 
             // ToDoList
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(900, 629);
+            this.ClientSize = new System.Drawing.Size(1800, 1210);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.priorityTextbox);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.doneButton);
             this.Controls.Add(this.dueLabel);
@@ -192,6 +229,7 @@
             this.Controls.Add(this.titleTextbox);
             this.Controls.Add(this.title);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "ToDoList";
             this.Text = "Check It! A To-Do List App";
             this.Load += new System.EventHandler(this.ToDoList_Load);
@@ -216,6 +254,8 @@
         private System.Windows.Forms.Label dueLabel;
         private System.Windows.Forms.Button doneButton;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.TextBox priorityTextbox;
+        private System.Windows.Forms.Label label1;
     }
 }
 

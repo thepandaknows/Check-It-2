@@ -24,6 +24,7 @@ namespace ToDoListApp
             // Create columns
             todoList.Columns.Add("Title");
             todoList.Columns.Add("Description");
+            todoList.Columns.Add("Priority");
             todoList.Columns.Add("Due Date", typeof(DateTime));
 
             // Point datagridview to the datasource
@@ -35,6 +36,7 @@ namespace ToDoListApp
             // clear out text fields
             titleTextbox.Text = "";
             descriptionTextbox.Text = "";
+            priorityTextbox.Text = "";
         }
 
         private void editButton_Click(object sender, EventArgs e)
@@ -45,6 +47,7 @@ namespace ToDoListApp
             // ItemArray = column (text or description)
             titleTextbox.Text = todoList.Rows[toDoListView.CurrentCell.RowIndex].ItemArray[0].ToString();
             descriptionTextbox.Text = todoList.Rows[toDoListView.CurrentCell.RowIndex].ItemArray[1].ToString();
+            priorityTextbox.Text = todoList.Rows[toDoListView.CurrentCell.RowIndex].ItemArray[2].ToString();
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
@@ -81,11 +84,12 @@ namespace ToDoListApp
                 // if existing note, ability to change it: grab input from text boxes and add to corresponding field in table
                 todoList.Rows[toDoListView.CurrentCell.RowIndex]["Title"] = titleTextbox.Text;
                 todoList.Rows[toDoListView.CurrentCell.RowIndex]["Description"] = descriptionTextbox.Text;
+                todoList.Rows[toDoListView.CurrentCell.RowIndex]["Priority"] = priorityTextbox.Text;
             }
             else
             {
                 // if brand new note, add text from title & description boxes as a new row (task item)
-                DataRow newRow = todoList.Rows.Add(titleTextbox.Text, descriptionTextbox.Text);
+                DataRow newRow = todoList.Rows.Add(titleTextbox.Text, descriptionTextbox.Text, priorityTextbox.Text);
 
                 // set the due date for the new row
                 newRow["Due Date"] = dateTimePicker1.Value;
@@ -93,6 +97,7 @@ namespace ToDoListApp
             // clear out all fields when clicking Save
             titleTextbox.Text = "";
             descriptionTextbox.Text = "";
+            priorityTextbox.Text = "";
             // dateTimePicker will default to today's date
             dateTimePicker1.Value = DateTime.Today;
             isEditing = false;
@@ -110,6 +115,7 @@ namespace ToDoListApp
                 // strike out the task title and description
                 selectedRow.Cells["Title"].Style.Font = new Font(toDoListView.Font, FontStyle.Strikeout);
                 selectedRow.Cells["Description"].Style.Font = new Font(toDoListView.Font, FontStyle.Strikeout);
+                selectedRow.Cells["Priority"].Style.Font = new Font(toDoListView.Font, FontStyle.Strikeout);
             } else
             {
                 MessageBox.Show("Please select a task to mark as done.");
