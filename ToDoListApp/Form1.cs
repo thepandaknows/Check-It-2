@@ -36,7 +36,7 @@ namespace ToDoListApp
             // clear out text fields
             titleTextbox.Text = "";
             descriptionTextbox.Text = "";
-            priorityTextbox.Text = "";
+            priorityComboBox.SelectedIndex = -1; // reset the ComboBox selection
         }
 
         private void editButton_Click(object sender, EventArgs e)
@@ -47,7 +47,9 @@ namespace ToDoListApp
             // ItemArray = column (text or description)
             titleTextbox.Text = todoList.Rows[toDoListView.CurrentCell.RowIndex].ItemArray[0].ToString();
             descriptionTextbox.Text = todoList.Rows[toDoListView.CurrentCell.RowIndex].ItemArray[1].ToString();
-            priorityTextbox.Text = todoList.Rows[toDoListView.CurrentCell.RowIndex].ItemArray[2].ToString();
+            // retrieve priority selection from drop-down
+            string priority = todoList.Rows[toDoListView.CurrentCell.RowIndex].ItemArray[2].ToString();
+            priorityComboBox.SelectedItem = priority;
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
@@ -81,15 +83,16 @@ namespace ToDoListApp
         {
             if(isEditing)
             {
-                // if existing note, ability to change it: grab input from text boxes and add to corresponding field in table
+                // if existing note, ability to change it: grab input from text boxes and drop-down priority combobox and add to corresponding field in table
                 todoList.Rows[toDoListView.CurrentCell.RowIndex]["Title"] = titleTextbox.Text;
                 todoList.Rows[toDoListView.CurrentCell.RowIndex]["Description"] = descriptionTextbox.Text;
-                todoList.Rows[toDoListView.CurrentCell.RowIndex]["Priority"] = priorityTextbox.Text;
+                todoList.Rows[toDoListView.CurrentCell.RowIndex]["Priority"] = priorityComboBox.SelectedItem.ToString();
             }
             else
             {
                 // if brand new note, add text from title & description boxes as a new row (task item)
-                DataRow newRow = todoList.Rows.Add(titleTextbox.Text, descriptionTextbox.Text, priorityTextbox.Text);
+                // assign priority level from priority drop-down
+                DataRow newRow = todoList.Rows.Add(titleTextbox.Text, descriptionTextbox.Text, priorityComboBox.SelectedItem.ToString());
 
                 // set the due date for the new row
                 newRow["Due Date"] = dateTimePicker1.Value;
@@ -97,7 +100,7 @@ namespace ToDoListApp
             // clear out all fields when clicking Save
             titleTextbox.Text = "";
             descriptionTextbox.Text = "";
-            priorityTextbox.Text = "";
+            priorityComboBox.SelectedIndex = -1; // reset the ComboBox selection
             // dateTimePicker will default to today's date
             dateTimePicker1.Value = DateTime.Today;
             isEditing = false;
@@ -130,7 +133,30 @@ namespace ToDoListApp
 
         private void priorityComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // check if an item is selected in the priority combo box
+            if (priorityComboBox.SelectedIndex != -1)
+            {
+                // retrieve the selected priority
+                string selectedPriority = priorityComboBox.SelectedItem.ToString();
 
+                // check if a row is selected in the DataGridView
+                if (toDoListView.SelectedRows.Count > 0)
+                {
+                    // get the selected row
+                    DataGridViewRow selectedRow = toDoListView.SelectedRows[0];
+
+                    // update the priority column of the selected row with the chosen priority
+                    selectedRow.Cells["Priority"].Value = selectedPriority;
+                }
+                else
+                {
+                    // ensure the user chooses a priority level
+                    MessageBox.Show("Please select a task to assign priority.");
+                }
+            } else
+            {
+                MessageBox.Show("Please select a priority.");
+            }
         }
     }
 }
