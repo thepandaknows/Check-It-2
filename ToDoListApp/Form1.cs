@@ -127,5 +127,10 @@ namespace ToDoListApp
         {
             // when user picks a date and clicks the save button, due date column will be added to the table
         }
+
+        private void priorityComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
