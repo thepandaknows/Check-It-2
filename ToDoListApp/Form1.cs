@@ -81,6 +81,13 @@ namespace ToDoListApp
 
         private void saveButton_Click(object sender, EventArgs e)
         {
+            // require the user to enter text in the Title field (Description is optional)
+            if (string.IsNullOrWhiteSpace(titleTextbox.Text))
+            {
+                MessageBox.Show("Please enter a title for the task.");
+                return; // stop the program if the Title field is empty
+            }
+            
             if(isEditing)
             {
                 // if existing note, ability to change it: grab input from text boxes and drop-down priority combobox and add to corresponding field in table
@@ -139,6 +146,7 @@ namespace ToDoListApp
                 // retrieve the selected priority
                 string selectedPriority = priorityComboBox.SelectedItem.ToString();
 
+                /*
                 // check if a row is selected in the DataGridView
                 if (toDoListView.SelectedRows.Count > 0)
                 {
@@ -147,13 +155,20 @@ namespace ToDoListApp
 
                     // update the priority column of the selected row with the chosen priority
                     selectedRow.Cells["Priority"].Value = selectedPriority;
+                }*/
+
+                if (isEditing)
+                {
+                    // update the priority of the currently edited task
+                    todoList.Rows[toDoListView.CurrentCell.RowIndex]["Priority"] = selectedPriority;
                 }
                 else
                 {
-                    // ensure the user chooses a priority level
-                    MessageBox.Show("Please select a task to assign priority.");
+                    // ensure the user chooses a task to edit before choosing priority level
+                    MessageBox.Show("Please select a task to edit before assigning priority.");
                 }
-            } else
+            } 
+            else
             {
                 MessageBox.Show("Please select a priority.");
             }

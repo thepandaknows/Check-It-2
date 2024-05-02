@@ -88,7 +88,7 @@
             this.titleLabel.Name = "titleLabel";
             this.titleLabel.Size = new System.Drawing.Size(748, 23);
             this.titleLabel.TabIndex = 4;
-            this.titleLabel.Text = "Title:";
+            this.titleLabel.Text = "Title: (required)";
             this.titleLabel.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // newButton
