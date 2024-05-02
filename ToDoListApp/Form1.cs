@@ -163,12 +163,12 @@ namespace ToDoListApp
 
         /*private void weekButton_Click(object sender, EventArgs e)  Function to change the selection range on the calendar to the week the user selects. 
         {
-           monthCalendar1 = new MonthCalendar();
-            DateTime.TryParseExact(monthCalendar1.FirstDayOfWeek);
+           monthCalendar1 = new MonthCalendar();  // Initilize the calendar from the form.
+            DateTime.TryParseExact(monthCalendar1.FirstDayOfWeek);  // FirstDayOfWeek returns a Day Variable and I am trying to convert a Day variable into a DateTime variable.
             monthCalendar1.TodayDate = monthCalendar1.FirstDayOfWeek;
-            //monthCalendar1.SelectionStart = ToDateTime.(monthCalendar1.FirstDayOfWeek);
-            
-            monthCalendar1.SelectionEnd = monthCalendar1.SelectionStart.AddDays(6);
+            //monthCalendar1.SelectionStart = ToDateTime.(monthCalendar1.FirstDayOfWeek); // Set the start of the selection range to the frist day of the week.
+             
+            monthCalendar1.SelectionEnd = monthCalendar1.SelectionStart.AddDays(6); // Have the end of the selection range be 7 day days after the start. 
             
             
             
