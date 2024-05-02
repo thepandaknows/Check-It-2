@@ -65,7 +65,7 @@ namespace ToDoListApp
                         // access the table, delete the selected row (task item)
                         todoList.Rows[toDoListView.CurrentCell.RowIndex].Delete();
                     }
-                } 
+                }
                 else
                 {
                     // error checking: make sure the user has selected a task for deletion
@@ -73,7 +73,7 @@ namespace ToDoListApp
                 }
             }
             catch (Exception ex)
-            { 
+            {
                 // error checking:
                 Console.WriteLine("Error: " + ex.ToString());
             }
@@ -81,7 +81,7 @@ namespace ToDoListApp
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            if(isEditing)
+            if (isEditing)
             {
                 // if existing note, ability to change it: grab input from text boxes and drop-down priority combobox and add to corresponding field in table
                 todoList.Rows[toDoListView.CurrentCell.RowIndex]["Title"] = titleTextbox.Text;
@@ -119,7 +119,8 @@ namespace ToDoListApp
                 selectedRow.Cells["Title"].Style.Font = new Font(toDoListView.Font, FontStyle.Strikeout);
                 selectedRow.Cells["Description"].Style.Font = new Font(toDoListView.Font, FontStyle.Strikeout);
                 selectedRow.Cells["Priority"].Style.Font = new Font(toDoListView.Font, FontStyle.Strikeout);
-            } else
+            }
+            else
             {
                 MessageBox.Show("Please select a task to mark as done.");
             }
@@ -153,10 +154,24 @@ namespace ToDoListApp
                     // ensure the user chooses a priority level
                     MessageBox.Show("Please select a task to assign priority.");
                 }
-            } else
+            }
+            else
             {
                 MessageBox.Show("Please select a priority.");
             }
         }
+
+        /*private void weekButton_Click(object sender, EventArgs e)  Function to change the selection range on the calendar to the week the user selects. 
+        {
+           monthCalendar1 = new MonthCalendar();
+            DateTime.TryParseExact(monthCalendar1.FirstDayOfWeek);
+            monthCalendar1.TodayDate = monthCalendar1.FirstDayOfWeek;
+            //monthCalendar1.SelectionStart = ToDateTime.(monthCalendar1.FirstDayOfWeek);
+            
+            monthCalendar1.SelectionEnd = monthCalendar1.SelectionStart.AddDays(6);
+            
+            
+            
+        }*/
     }
 }
