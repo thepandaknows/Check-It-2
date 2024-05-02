@@ -92,7 +92,7 @@ namespace ToDoListApp
             {
                 // if brand new note, add text from title & description boxes as a new row (task item)
                 // assign priority level from priority drop-down
-                DataRow newRow = todoList.Rows.Add(titleTextbox.Text, descriptionTextbox.Text, priorityComboBox.SelectedItem.ToString());
+                DataRow newRow = todoList.Rows.Add(titleTextbox.Text, descriptionTextbox.Text, priorityComboBox.SelectedItem != null ? priorityComboBox.SelectedItem.ToString() : "");
 
                 // set the due date for the new row
                 newRow["Due Date"] = dateTimePicker1.Value;
