@@ -146,27 +146,8 @@ namespace ToDoListApp
                 // retrieve the selected priority
                 string selectedPriority = priorityComboBox.SelectedItem.ToString();
 
-                /*
-                // check if a row is selected in the DataGridView
-                if (toDoListView.SelectedRows.Count > 0)
-                {
-                    // get the selected row
-                    DataGridViewRow selectedRow = toDoListView.SelectedRows[0];
-
-                    // update the priority column of the selected row with the chosen priority
-                    selectedRow.Cells["Priority"].Value = selectedPriority;
-                }*/
-
-                if (isEditing)
-                {
-                    // update the priority of the currently edited task
-                    todoList.Rows[toDoListView.CurrentCell.RowIndex]["Priority"] = selectedPriority;
-                }
-                else
-                {
-                    // ensure the user chooses a task to edit before choosing priority level
-                    MessageBox.Show("Please select a task to edit before assigning priority.");
-                }
+                // update the priority of the task currently being edited
+                todoList.Rows[toDoListView.CurrentCell.RowIndex]["Priority"] = selectedPriority;
             } 
             else
             {
