@@ -31,15 +31,52 @@ namespace ToDoListApp
             toDoListView.DataSource = todoList;
         }
 
-        private void newButton_Click(object sender, EventArgs e)
+        private void newButton_Click(object sender, EventArgs e) 
         {
-            // clear out text fields
-            titleTextbox.Text = "";
-            descriptionTextbox.Text = "";
-            priorityComboBox.SelectedIndex = -1; // reset the ComboBox selection
+            if (clearFields() == 1) // if anything fails in clearFields, end program.
+            {
+                MessageBox.Show("Failed to clear fields");
+                return;
+            }
         }
 
+        public int clearFields ()
+        {
+            // Call functions to clear each field
+            
+            if (clearTitle() != "" || clearDescription() != "" || resetPriority() != -1) // If functions fail return 1
+            {
+                return 1;
+            }
+            dateTimePicker1.Value = DateTime.Today;
+
+            return 0;
+        } // clear all fields
+        public string clearTitle()  // clear Title Textbox
+        {
+            titleTextbox.Text = "";
+            return titleTextbox.Text;
+        }
+        public string clearDescription()
+        {
+            descriptionTextbox.Text = "";
+            return descriptionTextbox.Text;
+        } // clear Description Textbox
+        public int resetPriority()
+        {
+            priorityComboBox.SelectedIndex = -1; // reset the ComboBox selection
+            return priorityComboBox.SelectedIndex;
+        } // clear priority dropdown to the blank option
+
         private void editButton_Click(object sender, EventArgs e)
+        {
+            if (editTask()== false)
+            {
+                MessageBox.Show("Faild to edit the fields");
+                return;
+            }
+        }
+        public bool editTask()
         {
             // load up a past item, extract the title & description into the text fields
             isEditing = true;
@@ -50,13 +87,23 @@ namespace ToDoListApp
             // retrieve priority selection from drop-down
             string priority = todoList.Rows[toDoListView.CurrentCell.RowIndex].ItemArray[2].ToString();
             priorityComboBox.SelectedItem = priority;
+            return isEditing;
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
+            if (deleteTask(toDoListView.SelectedRows.Count, toDoListView.CurrentCell.RowIndex)==1)
+            {
+                MessageBox.Show("Failed to delete task.");
+            }
+            
+        }
+
+        public int deleteTask(int x, int y)
+        {
             try
             {
-                if (toDoListView.SelectedRows.Count > 0)
+                if (x > 0)
                 {
                     // ask for confirmation before deleting
                     DialogResult result = MessageBox.Show("Are you sure you want to delete?", "Confirm Deletion", MessageBoxButtons.YesNo);
@@ -65,7 +112,7 @@ namespace ToDoListApp
                         // access the table, delete the selected row (task item)
                         todoList.Rows[toDoListView.CurrentCell.RowIndex].Delete();
                     }
-                } 
+                }
                 else
                 {
                     // error checking: make sure the user has selected a task for deletion
@@ -73,27 +120,38 @@ namespace ToDoListApp
                 }
             }
             catch (Exception ex)
-            { 
+            {
                 // error checking:
                 Console.WriteLine("Error: " + ex.ToString());
+            }
+            if (todoList.Rows[y] != null)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
             }
         }
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            // require the user to enter text in the Title field (Description is optional)
-            if (string.IsNullOrWhiteSpace(titleTextbox.Text))
+            if (noTitleCheck(titleTextbox.Text)== "") // Verify the user 
             {
-                MessageBox.Show("Please enter a title for the task.");
-                return; // stop the program if the Title field is empty
+                return; //stop the program if the Title field is empty
             }
-            
-            if(isEditing)
+
+
+            if (isEditing)
             {
                 // if existing note, ability to change it: grab input from text boxes and drop-down priority combobox and add to corresponding field in table
-                todoList.Rows[toDoListView.CurrentCell.RowIndex]["Title"] = titleTextbox.Text;
-                todoList.Rows[toDoListView.CurrentCell.RowIndex]["Description"] = descriptionTextbox.Text;
-                todoList.Rows[toDoListView.CurrentCell.RowIndex]["Priority"] = priorityComboBox.SelectedItem.ToString();
+                if (saveTask() == 1) //Check if saveTask fails.
+                {
+                    MessageBox.Show("Failed to save task");
+                    return;
+                }
+
+
             }
             else
             {
@@ -105,12 +163,49 @@ namespace ToDoListApp
                 newRow["Due Date"] = dateTimePicker1.Value;
             }
             // clear out all fields when clicking Save
-            titleTextbox.Text = "";
-            descriptionTextbox.Text = "";
-            priorityComboBox.SelectedIndex = -1; // reset the ComboBox selection
-            // dateTimePicker will default to today's date
-            dateTimePicker1.Value = DateTime.Today;
+            clearFields();
             isEditing = false;
+        }
+        public string noTitleCheck (string x)
+        {
+            // require the user to enter text in the Title field (Description is optional)
+            if (string.IsNullOrWhiteSpace(x))
+            {
+                MessageBox.Show("Please enter a title for the task.");
+                return ""; //Return empty string
+            }
+            return x;  //Return the title
+        }
+
+        
+       public int saveTask() //Save information from fields to the datagrid.
+        {
+            if (saveTitle() == "" || saveDescription() == "" || savePriority() == "0") // If functions fail return 1
+            {
+                return 1;
+            }
+            return 0;
+        }
+        public string saveTitle()
+        {
+            todoList.Rows[toDoListView.CurrentCell.RowIndex]["Title"] = titleTextbox.Text;
+            return todoList.Rows[toDoListView.CurrentCell.RowIndex]["Title"].ToString();
+        }
+
+        public string saveDescription()
+        {
+            todoList.Rows[toDoListView.CurrentCell.RowIndex]["Description"] = descriptionTextbox.Text;
+            return todoList.Rows[toDoListView.CurrentCell.RowIndex]["Description"].ToString();
+        }
+
+        public string savePriority()
+        {
+            if (priorityComboBox.SelectedItem == null)
+            {
+                todoList.Rows[toDoListView.CurrentCell.RowIndex]["Priority"] = priorityComboBox.SelectedIndex = 0;
+            }
+            todoList.Rows[toDoListView.CurrentCell.RowIndex]["Priority"] = priorityComboBox.SelectedItem.ToString();
+            return todoList.Rows[toDoListView.CurrentCell.RowIndex]["Priority"].ToString();
         }
 
         private void doneButton_Click(object sender, EventArgs e)
@@ -147,7 +242,10 @@ namespace ToDoListApp
                 string selectedPriority = priorityComboBox.SelectedItem.ToString();
 
                 // update the priority of the task currently being edited
-                todoList.Rows[toDoListView.CurrentCell.RowIndex]["Priority"] = selectedPriority;
+                if (isEditing)  //update selected cell
+                { todoList.Rows[toDoListView.CurrentCell.RowIndex]["Priority"] = selectedPriority; 
+                }
+                priorityComboBox.SelectedItem = priorityComboBox.SelectedIndex;  // change priority box without changing last edited cell.
             } 
             else
             {
