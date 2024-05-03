@@ -31,15 +31,43 @@ namespace ToDoListApp
             toDoListView.DataSource = todoList;
         }
 
-        private void newButton_Click(object sender, EventArgs e)
+        private void newButton_Click(object sender, EventArgs e) 
         {
-            // clear out text fields
-            titleTextbox.Text = "";
-            descriptionTextbox.Text = "";
-            priorityComboBox.SelectedIndex = -1; // reset the ComboBox selection
+            clearFields();
         }
 
+        public int clearFields ()
+        {
+            // Call functions to clear each field
+            
+            if (clearTitle() != "" || clearDescription() != "" || resetPriority() != -1) // If functions fail return 1
+            {
+                return 1;
+            }
+
+            return 0;
+        }
+        public string clearTitle()  // clear Title Textbox
+        {
+            titleTextbox.Text = "";
+            return titleTextbox.Text;
+        }
+        public string clearDescription()
+        {
+            descriptionTextbox.Text = "";
+            return descriptionTextbox.Text;
+        } // clear Description Textbox
+        public int resetPriority()
+        {
+            priorityComboBox.SelectedIndex = -1; // reset the ComboBox selection
+            return priorityComboBox.SelectedIndex;
+        } // clear priority dropdown to the blank option
+
         private void editButton_Click(object sender, EventArgs e)
+        {
+            editTask();
+        }
+        public void editTask()
         {
             // load up a past item, extract the title & description into the text fields
             isEditing = true;
@@ -81,19 +109,23 @@ namespace ToDoListApp
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            // require the user to enter text in the Title field (Description is optional)
-            if (string.IsNullOrWhiteSpace(titleTextbox.Text))
+            if (noTitleCheck(titleTextbox.Text)== "") // Verify the user 
             {
-                MessageBox.Show("Please enter a title for the task.");
-                return; // stop the program if the Title field is empty
+                return; //stop the program if the Title field is empty
             }
-            
-            if(isEditing)
+
+
+            if (isEditing)
             {
                 // if existing note, ability to change it: grab input from text boxes and drop-down priority combobox and add to corresponding field in table
                 todoList.Rows[toDoListView.CurrentCell.RowIndex]["Title"] = titleTextbox.Text;
                 todoList.Rows[toDoListView.CurrentCell.RowIndex]["Description"] = descriptionTextbox.Text;
+               if (priorityComboBox.SelectedItem == null)
+                {
+                    todoList.Rows[toDoListView.CurrentCell.RowIndex]["Priority"] = priorityComboBox.SelectedIndex = 0;
+                }
                 todoList.Rows[toDoListView.CurrentCell.RowIndex]["Priority"] = priorityComboBox.SelectedItem.ToString();
+                
             }
             else
             {
@@ -112,7 +144,16 @@ namespace ToDoListApp
             dateTimePicker1.Value = DateTime.Today;
             isEditing = false;
         }
-
+        public string noTitleCheck (string x)
+        {
+            // require the user to enter text in the Title field (Description is optional)
+            if (string.IsNullOrWhiteSpace(x))
+            {
+                MessageBox.Show("Please enter a title for the task.");
+                return ""; //Return empty string
+            }
+            return x;  //Return the title
+        }
         private void doneButton_Click(object sender, EventArgs e)
         {
             // when user selects a task and clicks the Check it! button, the task text will be struck out
@@ -147,7 +188,10 @@ namespace ToDoListApp
                 string selectedPriority = priorityComboBox.SelectedItem.ToString();
 
                 // update the priority of the task currently being edited
-                todoList.Rows[toDoListView.CurrentCell.RowIndex]["Priority"] = selectedPriority;
+                if (isEditing)  //update selected cell
+                { todoList.Rows[toDoListView.CurrentCell.RowIndex]["Priority"] = selectedPriority; 
+                }
+                priorityComboBox.SelectedItem = priorityComboBox.SelectedIndex;  // change priority box without changing last edited cell.
             } 
             else
             {
