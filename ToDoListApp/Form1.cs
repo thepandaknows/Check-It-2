@@ -33,7 +33,11 @@ namespace ToDoListApp
 
         private void newButton_Click(object sender, EventArgs e) 
         {
-            clearFields();
+            if (clearFields() == 1) // if anything fails in clearFields, end program.
+            {
+                MessageBox.Show("Failed to clear fields");
+                return;
+            }
         }
 
         public int clearFields ()
@@ -44,9 +48,10 @@ namespace ToDoListApp
             {
                 return 1;
             }
+            dateTimePicker1.Value = DateTime.Today;
 
             return 0;
-        }
+        } // clear all fields
         public string clearTitle()  // clear Title Textbox
         {
             titleTextbox.Text = "";
@@ -65,9 +70,13 @@ namespace ToDoListApp
 
         private void editButton_Click(object sender, EventArgs e)
         {
-            editTask();
+            if (editTask()== false)
+            {
+                MessageBox.Show("Faild to edit the fields");
+                return;
+            }
         }
-        public void editTask()
+        public bool editTask()
         {
             // load up a past item, extract the title & description into the text fields
             isEditing = true;
@@ -78,13 +87,23 @@ namespace ToDoListApp
             // retrieve priority selection from drop-down
             string priority = todoList.Rows[toDoListView.CurrentCell.RowIndex].ItemArray[2].ToString();
             priorityComboBox.SelectedItem = priority;
+            return isEditing;
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
+            if (deleteTask(toDoListView.SelectedRows.Count, toDoListView.CurrentCell.RowIndex)==1)
+            {
+                MessageBox.Show("Failed to delete task.");
+            }
+            
+        }
+
+        public int deleteTask(int x, int y)
+        {
             try
             {
-                if (toDoListView.SelectedRows.Count > 0)
+                if (x > 0)
                 {
                     // ask for confirmation before deleting
                     DialogResult result = MessageBox.Show("Are you sure you want to delete?", "Confirm Deletion", MessageBoxButtons.YesNo);
@@ -93,7 +112,7 @@ namespace ToDoListApp
                         // access the table, delete the selected row (task item)
                         todoList.Rows[toDoListView.CurrentCell.RowIndex].Delete();
                     }
-                } 
+                }
                 else
                 {
                     // error checking: make sure the user has selected a task for deletion
@@ -101,9 +120,17 @@ namespace ToDoListApp
                 }
             }
             catch (Exception ex)
-            { 
+            {
                 // error checking:
                 Console.WriteLine("Error: " + ex.ToString());
+            }
+            if (todoList.Rows[y] != null)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
             }
         }
 
@@ -118,14 +145,13 @@ namespace ToDoListApp
             if (isEditing)
             {
                 // if existing note, ability to change it: grab input from text boxes and drop-down priority combobox and add to corresponding field in table
-                todoList.Rows[toDoListView.CurrentCell.RowIndex]["Title"] = titleTextbox.Text;
-                todoList.Rows[toDoListView.CurrentCell.RowIndex]["Description"] = descriptionTextbox.Text;
-               if (priorityComboBox.SelectedItem == null)
+                if (saveTask() == 1) //Check if saveTask fails.
                 {
-                    todoList.Rows[toDoListView.CurrentCell.RowIndex]["Priority"] = priorityComboBox.SelectedIndex = 0;
+                    MessageBox.Show("Failed to save task");
+                    return;
                 }
-                todoList.Rows[toDoListView.CurrentCell.RowIndex]["Priority"] = priorityComboBox.SelectedItem.ToString();
-                
+
+
             }
             else
             {
@@ -137,11 +163,7 @@ namespace ToDoListApp
                 newRow["Due Date"] = dateTimePicker1.Value;
             }
             // clear out all fields when clicking Save
-            titleTextbox.Text = "";
-            descriptionTextbox.Text = "";
-            priorityComboBox.SelectedIndex = -1; // reset the ComboBox selection
-            // dateTimePicker will default to today's date
-            dateTimePicker1.Value = DateTime.Today;
+            clearFields();
             isEditing = false;
         }
         public string noTitleCheck (string x)
@@ -154,6 +176,38 @@ namespace ToDoListApp
             }
             return x;  //Return the title
         }
+
+        
+       public int saveTask() //Save information from fields to the datagrid.
+        {
+            if (saveTitle() == "" || saveDescription() == "" || savePriority() == "0") // If functions fail return 1
+            {
+                return 1;
+            }
+            return 0;
+        }
+        public string saveTitle()
+        {
+            todoList.Rows[toDoListView.CurrentCell.RowIndex]["Title"] = titleTextbox.Text;
+            return todoList.Rows[toDoListView.CurrentCell.RowIndex]["Title"].ToString();
+        }
+
+        public string saveDescription()
+        {
+            todoList.Rows[toDoListView.CurrentCell.RowIndex]["Description"] = descriptionTextbox.Text;
+            return todoList.Rows[toDoListView.CurrentCell.RowIndex]["Description"].ToString();
+        }
+
+        public string savePriority()
+        {
+            if (priorityComboBox.SelectedItem == null)
+            {
+                todoList.Rows[toDoListView.CurrentCell.RowIndex]["Priority"] = priorityComboBox.SelectedIndex = 0;
+            }
+            todoList.Rows[toDoListView.CurrentCell.RowIndex]["Priority"] = priorityComboBox.SelectedItem.ToString();
+            return todoList.Rows[toDoListView.CurrentCell.RowIndex]["Priority"].ToString();
+        }
+
         private void doneButton_Click(object sender, EventArgs e)
         {
             // when user selects a task and clicks the Check it! button, the task text will be struck out
