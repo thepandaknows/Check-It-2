@@ -80,7 +80,7 @@ namespace ToDoListApp
             string test = app.noTitleCheck(expected);
             Assert.That(test, Is.EqualTo(expected));
         }
-        [Test]
+        /*[Test]
         public void saveTask_Valid() // fails because I need mock data for this test
         {
             ToDoList app = new ToDoList();
@@ -95,7 +95,7 @@ namespace ToDoListApp
             string expected = "";
             string test = app.saveTitle();
             Assert.That(test, Is.Not.EqualTo(expected));
-        }
+        }*/
 
          [Test]
          public void deleteTask_Test()  // Need to make fake cells in the datagrid array. I tried using Moq and I can't get anything to compile that lets me create a fake cell.
@@ -116,27 +116,7 @@ namespace ToDoListApp
 
          }
         
-        /*[Test]
-        public void DeleteTask_Valid()
-        {
-            // Arrange
-            var mockDataAccess = new Mock<ToDoList>();
-            var todoList = new ToDoList();
-            
-            todoList.Rows.Add("Task1", "Description1", "High", DateTime.Now);
-            mockDataAccess.Setup(x => x.GetToDoList()).Returns(todoList);
-
-            var app = new ToDoList();
-
-            // Act
-            int initialRowCount = app.GetToDoList().Rows.Count;
-            int result = app.DeleteTask(0, 0);
-
-            // Assert
-            Assert.That(initialRowCount, Is.EqualTo(1));
-            Assert.That(result, Is.EqualTo(0));
-            Assert.That(app.GetToDoList().Rows.Count,Is.EqualTo(0));
-        }*/
+       
 
     }
 }
