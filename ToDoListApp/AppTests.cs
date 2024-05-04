@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,13 +7,21 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using Moq;
 using Moq.Protected;
+using ToDoListApp;
+
+
 
 namespace ToDoListApp
 {
+
+    
     [TestFixture]
 
     internal class AppTests
     {
+       
+       
+
         [Test]
         public void ValidateListLoads()
         {
@@ -88,12 +97,11 @@ namespace ToDoListApp
             Assert.That(test, Is.Not.EqualTo(expected));
         }
 
-        /* [Test]
-         public void deleteTask_Test(int x, int y)  // Need to make fake cells in the datagrid array. I tried using Moq and I can't get anything to compile that lets me create a fake cell.
+         [Test]
+         public void deleteTask_Test()  // Need to make fake cells in the datagrid array. I tried using Moq and I can't get anything to compile that lets me create a fake cell.
          {
-             var mockToDoList = new Moq<ToDoList>();
-             mockToDoList.SetupGet(x => x.todoList)
-                 .Returns(new DataTable());
+             var mockToDoList = new Mock<ToDoList>();
+             mockToDoList.SetupGet(x => x.todoList).Returns(new DataTable());
 
              mockToDoList.Object.todoList.Rows.Add("Task1", "Description1", "High", DateTime.Now);
 
@@ -102,13 +110,33 @@ namespace ToDoListApp
              int result = mockToDoList.Object.deleteTask(1, 0);
 
              // Assert
-             Assert.AreEqual(1, initialRowCount);
-             Assert.AreEqual(0, result);
-             Assert.AreEqual(0, mockToDoList.Object.todoList.Rows.Count);
+             Assert.That(initialRowCount, Is.EqualTo(1));
+             Assert.That(result,Is.EqualTo(0));
+             Assert.That(mockToDoList.Object.todoList.Rows.Count, Is.EqualTo(0));
 
          }
-        */
+        
+        /*[Test]
+        public void DeleteTask_Valid()
+        {
+            // Arrange
+            var mockDataAccess = new Mock<ToDoList>();
+            var todoList = new ToDoList();
+            
+            todoList.Rows.Add("Task1", "Description1", "High", DateTime.Now);
+            mockDataAccess.Setup(x => x.GetToDoList()).Returns(todoList);
 
+            var app = new ToDoList();
+
+            // Act
+            int initialRowCount = app.GetToDoList().Rows.Count;
+            int result = app.DeleteTask(0, 0);
+
+            // Assert
+            Assert.That(initialRowCount, Is.EqualTo(1));
+            Assert.That(result, Is.EqualTo(0));
+            Assert.That(app.GetToDoList().Rows.Count,Is.EqualTo(0));
+        }*/
 
     }
 }

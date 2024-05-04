@@ -10,14 +10,15 @@ using System.Windows.Forms;
 
 namespace ToDoListApp
 {
+
     public partial class ToDoList : Form
     {
         public ToDoList()
         {
             InitializeComponent();
         }
-
-        DataTable todoList = new DataTable();
+        
+        public DataTable todoList = new DataTable();
         bool isEditing = false;
         private void ToDoList_Load(object sender, EventArgs e)
         {
